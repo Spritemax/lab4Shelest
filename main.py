@@ -25,13 +25,13 @@ def parser_between_dates(start='1/1/2021', end='12/31/2021'):
 
 
 s3 = boto3.client('s3')
-results = s3.list_objects(Bucket='shelestBucket', Prefix='data.csv')
+results = s3.list_objects(Bucket='shelestbucket', Prefix='data.csv')
 
 try:
-    s3_download('data.csv', 'shelestBucket')
+    s3_download('data.csv', 'shelestbucket')
 except:
     parser_between_dates()
-    s3_upload('data.csv', 'shelestBucket')
+    s3_upload('data.csv', 'shelestbucket')
 
 df = pd.read_csv("data.csv")
 
@@ -43,4 +43,4 @@ df.plot(x='date', y=['USD', 'EUR'], figsize=(15, 7), title="UAH currency", fonts
 plt.savefig('plot.png')
 
 
-s3_upload('plot.png', 'shelestBucket')
+s3_upload('plot.png', 'shelestbucket')
